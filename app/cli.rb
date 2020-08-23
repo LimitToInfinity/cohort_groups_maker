@@ -79,6 +79,10 @@ class Cli
   end
 
   def one_list_with_staff
+    all_people = @students + @staff
+    all_people.shuffle.each do |person|
+      puts person
+    end
     puts 'one list with staff'
   end
 
