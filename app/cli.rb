@@ -7,32 +7,48 @@ class Cli
     cohorts_unsorted.sort_by { |_, info| info['start_date'] }.reverse!
   end
 
-  def initialize
-    @cohorts = cohorts
+  def tty_prompt
+    TTY::Prompt.new(
+      symbols: { marker: '💃' },
+      # active_color: :cyan,
+      # help_color: :bright_cyan
+    )
   end
 
-  def menu
-    puts "Enter the menu number of the cohort(s) you want to include in the grouping.\n"
-    if @cohort_3
-      list_three_cohort_options
-    else
-      list_two_cohort_options
+  def initialize
+    @cohorts = cohorts
+    @prompt = tty_prompt
+  end
+
+  def prompt_ask(prompt, options = {})
+    @prompt.ask(prompt, options) { |q| q.modify :strip }
+  end
+
+  def prompt_select(prompt, choices)
+    @prompt.select(prompt, choices, per_page: 5, filter: true)
+  end
+
+  def prompt_select_yes?(prompt)
+    prompt_select(prompt, yes: true, no: false)
+  end
+
+  def prompt_multi_select(prompt, choices)
+    @prompt.multi_select(prompt, choices, min: 1, per_page: 5, filter: true)
+  end
+
+  def welcome_menu
+    prompt_multi_select('Which cohorts are involved?', cohort_choices)
+  end
+
+  def cohort_choices
+    
+  end
+
+  def main_menu
+    loop do
+      value = prompt_select('What would you like to do?', menu_options)
+      break if value == 'exit'
     end
-    cohort_choice = gets.chomp.to_i
-    chosen_cohorts = cohort_map[cohort_choice]
-
-    puts "Do you want groups of 2, 3, 4, or 5?\n"
-    group_choice = gets.chomp.to_i
-
-    student_list = chosen_cohorts.inject([]) do |all_students, cohort|
-      cohort.students.each do |student|
-        all_students.push(student)
-      end
-      all_students
-    end
-
-    cohort_students = Cohort.new(nil, student_list)
-    cohort_students.pairs_of(group_choice)
   end
 
   private
