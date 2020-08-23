@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# cohort class
 class Cohort
   attr_accessor :students, :name
 

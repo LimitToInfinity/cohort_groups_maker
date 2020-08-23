@@ -1,8 +1,14 @@
+# frozen_string_literal: true
+
+# cli class to hold app logic
 class Cli
-  def initialize(cohort_1, cohort_2, cohort_3 = nil)
-    @cohort_1 = cohort_1
-    @cohort_2 = cohort_2
-    @cohort_3 = cohort_3
+  def cohorts
+    cohorts_unsorted = JSON.parse(File.read('app/cohorts.json'))
+    cohorts_unsorted.sort_by { |_, info| info['start_date'] }.reverse!
+  end
+
+  def initialize
+    @cohorts = cohorts
   end
 
   def menu

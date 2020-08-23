@@ -1,69 +1,9 @@
-require 'pry'
-require './cohort'
-require './cli'
+# frozen_string_literal: true
 
-die_prying = %w(
-  Aaron 
-  Alice
-  Adam 
-  Brad 
-  Corey 
-  Doug 
-  Evan
-  Jared 
-  Jeremy 
-  Jorge
-  Josh 
-  Lilly 
-  Mike 
-  Miwha 
-  Tissi
-)
+require_relative 'config/environment'
 
-json_derulo = %w(
-  AJ
-  Zach-J 
-  Zach-M
-  Denise
-  Jack
-  Joe
-  Jon
-  JT
-  Katie
-  Kristine
-  Matt
-  Mike
-  Rachel
-  Todd
-  Brandon
-  Nick
-  Tyler
-)
+binding.pry
 
-new_friends = %w(
-  Ashley
-  Austin
-  Blake
-  Chris
-  Daniel
-  David F
-  Gregg
-  Hannah
-  Indiana
-  James
-  Jason
-  Justin
-  Katie
-  Lisa
-  Lydia
-  Lynn
-  Nolan
-  Ryan
-  Iuliia
-  Jeremy
-)
-
-all_students = json_derulo + die_prying + new_friends
 
 # Comment in/out code below to get pairs for desired cohort
 # git_mon = Cohort.new("Git Money", git_money)
