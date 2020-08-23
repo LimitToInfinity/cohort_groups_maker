@@ -2,11 +2,6 @@
 
 # cli class to hold app logic
 class Cli
-  def cohorts
-    cohorts_unsorted = JSON.parse(File.read('app/cohorts.json'))
-    cohorts_unsorted.sort_by { |_, info| info['start_date'] }.reverse!
-  end
-
   def tty_prompt
     TTY::Prompt.new(
       symbols: { marker: '💃' },
@@ -15,9 +10,27 @@ class Cli
     )
   end
 
+  def cohorts
+    cohorts_unsorted = JSON.parse(File.read('app/cohorts.json'))
+    cohorts_unsorted.sort_by { |_, info| info['start_date'] }.reverse!
+  end
+
+  def staff
+    %w[
+      Kyle\ Coberly
+      Damon\ Chivers
+      Ahmed\ Gaber
+      Kristine\ Du
+      Brian\ Firooz
+      Josh\ Couper
+    ]
+  end
+
   def initialize
-    @cohorts = cohorts
     @prompt = tty_prompt
+    @cohorts = cohorts
+    @students = []
+    @staff = staff
   end
 
   def prompt_ask(prompt, options = {})
@@ -36,50 +49,40 @@ class Cli
     @prompt.multi_select(prompt, choices, min: 1, per_page: 5, filter: true)
   end
 
-  def welcome_menu
-    prompt_multi_select('Which cohorts are involved?', cohort_choices)
+  def opening_menu
+    @students = prompt_multi_select('Which cohorts?', cohort_choices)
   end
 
   def cohort_choices
-    
-  end
-
-  def main_menu
-    loop do
-      value = prompt_select('What would you like to do?', menu_options)
-      break if value == 'exit'
+    @cohorts.each_with_object({}) do |(name, info), choices|
+      if Date.parse(info['start_date']).cweek + 15 > Date.today.cweek
+        choices[name] = info['names']
+      end
+      choices
     end
   end
 
-  private
-
-  def list_two_cohort_options
-    puts "
-    1. #{@cohort_1.name}
-    2. #{@cohort_2.name}
-    4. #{@cohort_1.name} and #{@cohort_2.name}"
+  def second_menu
+    prompt_select('List type?', second_menu_selections)
   end
 
-  def list_three_cohort_options
-    puts "
-    1. #{@cohort_1.name}
-    2. #{@cohort_2.name}
-    3. #{@cohort_3.name}
-    4. #{@cohort_1.name} and #{@cohort_2.name}
-    5. #{@cohort_1.name} and #{@cohort_3.name}
-    6. #{@cohort_2.name} and #{@cohort_3.name}
-    7. #{@cohort_1.name} and #{@cohort_2.name} and #{@cohort_3.name}"
-  end
-
-  def cohort_map
+  def second_menu_selections
     {
-      1 => [@cohort_1],
-      2 => [@cohort_2],
-      3 => [@cohort_3],
-      4 => [@cohort_1, @cohort_2],
-      5 => [@cohort_1, @cohort_3],
-      6 => [@cohort_2, @cohort_3],
-      7 => [@cohort_1, @cohort_2, @cohort_3]
+      groups: -> { make_groups },
+      "1 list with staff": -> { one_list_with_staff },
+      "1 list students only": -> { one_list_students_only },
     }
+  end
+
+  def make_groups
+    puts 'make groups'
+  end
+
+  def one_list_with_staff
+    puts 'one list with staff'
+  end
+
+  def one_list_students_only
+    puts 'one list students only'
   end
 end
