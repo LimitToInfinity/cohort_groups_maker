@@ -76,7 +76,8 @@ class Cli
   end
 
   def make_groups
-    puts 'make groups'
+    puts '---student groups---'
+    @students.flatten
   end
 
   def one_list_with_staff
@@ -100,9 +101,8 @@ class Cli
 
   def one_list_students_only
     puts '---one list students only---'
-    @students.each do |student|
-      puts student
-    end
+    mixed_students = @students.flatten.shuffle.shuffle.shuffle.shuffle
+    mixed_students.each { |student| puts student }
   end
 
   def add_instructors
