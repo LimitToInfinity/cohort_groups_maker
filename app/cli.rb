@@ -63,6 +63,14 @@ class Cli
     end
   end
 
+  def remove_students_who_are_out
+    any_students_out = prompt_select_yes?('Are any students out today?')
+    return unless any_students_out
+
+    students_out = prompt_multi_select('Who is out?', @cohorts.flatten.sort)
+    @cohorts = @cohorts.map { |cohort| cohort - students_out }
+  end
+
   def list_selection
     prompt_select('List type?', list_selections)
   end
