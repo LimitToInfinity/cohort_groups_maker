@@ -5,8 +5,8 @@ class Cli
   def tty_prompt
     TTY::Prompt.new(
       symbols: { marker: '💃' },
-      # active_color: :cyan,
-      # help_color: :bright_cyan
+      active_color: :red,
+      help_color: :yellow
     )
   end
 
@@ -34,6 +34,7 @@ class Cli
     @coaches = coaches
     @staff = staff
     @groups = []
+    @group_index = 0
     @three_lists = [[], [], []]
   end
 
@@ -75,19 +76,22 @@ class Cli
     }
   end
 
+  def add_groups(cohort)
+    cohort_size_divided_by_two = (cohort.length / 2.0).floor
+    cohort_size_divided_by_two.times { @groups << [] }
+  end
+
+  def add_student_to_group(cohort)
+    @groups[@group_index] << cohort.delete(cohort.sample)
+    @group_index = @group_index < (@groups.length - 1) ? (@group_index + 1) : 0
+  end
+
   def make_groups
     puts '---student groups---'
     cohorts_by_biggest_size = @cohorts.sort_by(&:length).reverse!
     cohorts_by_biggest_size.each.with_index(1) do |cohort, index|
-      if index == 1
-        cohort_size_divided_by_two = (cohort.length / 2.0).floor
-        cohort_size_divided_by_two.times { @groups << [] }
-      end
-      group_index = 0
-      while cohort.length.positive?
-        @groups[group_index] << cohort.delete(cohort.sample)
-        group_index = group_index < (@groups.length - 1) ? (group_index + 1) : 0
-      end
+      add_groups(cohort) if index == 1
+      add_student_to_group(cohort) while cohort.length.positive?
     end
     @groups.each { |group| puts group.join('   |   ') }
   end
