@@ -7,6 +7,6 @@
 4. Copy and paste the pairs when you're done!
 
 ### Upkeep
-* Add cohort to `app/cohorts.json` when cohorts start. (accounts for cohorts more than 15 weeks old using start_date)
+* Add cohorts to `app/cohorts.json` when cohorts start. (automatically doesn't display cohorts that started more than 15 weeks ago using start_date)
 * Update cohort names in `app/cohorts.json` after each mod for those who stay another six weeks
 * Update instructors, coaches, and/or staff arrays/methods in `Cli.rb` when needed
