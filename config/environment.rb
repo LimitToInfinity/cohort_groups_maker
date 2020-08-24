@@ -3,7 +3,7 @@
 require 'bundler/setup'
 Bundler.require
 
-require 'date'
 require 'pry'
+require 'active_support/core_ext/time/calculations'
 
 require_all 'app'
