@@ -56,10 +56,8 @@ class Cli
 
   def cohort_choices
     cohort_hashes.each_with_object({}) do |(name, info), choices|
-      if Date.parse(info['start_date']).cweek + 15 > Date.today.cweek
-        choices[name] = info['names']
-      end
-      choices
+      graduation_date = Date.parse(info['start_date']) + 102
+      choices[name] = info['names'] if graduation_date.future?
     end
   end
 
