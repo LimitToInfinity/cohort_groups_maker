@@ -10,7 +10,7 @@ class Cli
     )
   end
 
-  def cohorts
+  def cohort_hashes
     cohorts_unsorted = JSON.parse(File.read('app/cohorts.json'))
     cohorts_unsorted.sort_by { |_, info| info['start_date'] }.reverse!
   end
@@ -29,8 +29,7 @@ class Cli
 
   def initialize
     @prompt = tty_prompt
-    @cohorts = cohorts
-    @students = []
+    @cohorts = []
     @lead_instructors = lead_instructors
     @coaches = coaches
     @staff = staff
@@ -51,11 +50,11 @@ class Cli
   end
 
   def cohort_selection
-    @students = prompt_multi_select('Which cohorts?', cohort_choices)
+    @cohorts = prompt_multi_select('Which cohorts?', cohort_choices)
   end
 
   def cohort_choices
-    @cohorts.each_with_object({}) do |(name, info), choices|
+    cohort_hashes.each_with_object({}) do |(name, info), choices|
       if Date.parse(info['start_date']).cweek + 15 > Date.today.cweek
         choices[name] = info['names']
       end
@@ -64,10 +63,10 @@ class Cli
   end
 
   def list_selection
-    prompt_select('List type?', second_menu_selections)
+    prompt_select('List type?', list_selections)
   end
 
-  def second_menu_selections
+  def list_selections
     {
       groups: -> { make_groups },
       "1 list with staff": -> { one_list_with_staff },
@@ -78,16 +77,25 @@ class Cli
 
   def make_groups
     puts '---student groups---'
-    cohort_index = 0
-    @students.each do |cohort|
-      
+    cohorts_by_biggest_size = @cohorts.sort_by(&:length).reverse!
+    cohorts_by_biggest_size.each.with_index(1) do |cohort, index|
+      if index == 1
+        cohort_size_divided_by_two = (cohort.length / 2.0).ceil
+        cohort_size_divided_by_two.times { @groups << [] }
+      end
+      group_index = 0
+      while cohort.length.positive?
+        @groups[group_index] << cohort.delete(cohort.sample)
+        group_index = group_index < (@groups.length - 1) ? (group_index + 1) : 0
+      end
     end
+    @groups.each { |group| puts group.join('   |   ') }
   end
 
   def one_list_with_staff
     remove_staff_who_are_out
     puts '---one list with staff---'
-    all_people = (@lead_instructors + @coaches + @staff + @students).flatten
+    all_people = (@lead_instructors + @coaches + @staff + @cohorts).flatten
     all_people = all_people.shuffle.shuffle.shuffle.shuffle.shuffle
     all_people.each { |person| puts person }
   end
@@ -103,7 +111,7 @@ class Cli
 
   def one_list_students_only
     puts '---one list students only---'
-    mixed_students = @students.flatten.shuffle.shuffle.shuffle.shuffle
+    mixed_students = @cohorts.flatten.shuffle.shuffle.shuffle.shuffle
     mixed_students.each { |student| puts student }
   end
 
@@ -125,7 +133,7 @@ class Cli
   end
 
   def add_students
-    @students.each do |cohort|
+    @cohorts.each do |cohort|
       list_index = 0
       while cohort.length.positive?
         @three_lists[list_index] << cohort.delete(cohort.sample)
