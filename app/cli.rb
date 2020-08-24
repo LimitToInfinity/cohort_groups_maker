@@ -82,7 +82,8 @@ class Cli
   def one_list_with_staff
     remove_staff_who_are_out
     puts '---one list with staff---'
-    all_people = (@students + @staff).flatten.shuffle.shuffle.shuffle.shuffle
+    all_people = (@lead_instructors + @coaches + @staff + @students).flatten
+    all_people = all_people.shuffle.shuffle.shuffle.shuffle.shuffle
     all_people.each do |person|
       puts person
     end
@@ -95,6 +96,13 @@ class Cli
     add_coaches_and_staff
     add_students
     display_each_list
+  end
+
+  def one_list_students_only
+    puts '---one list students only---'
+    @students.each do |student|
+      puts student
+    end
   end
 
   def add_instructors
@@ -131,10 +139,6 @@ class Cli
         puts person
       end
     end
-  end
-
-  def one_list_students_only
-    puts 'one list students only'
   end
 
   def remove_staff_who_are_out
