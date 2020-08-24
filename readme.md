@@ -13,9 +13,11 @@
 
 #### Making Groups
 ![Making Groups](/assets/gifs/student_groups.gif)
+---
 
 #### 3 Lists with Staff (like feelings)
 ![3 Lists with Staff (like feelings)](/assets/gifs/3_lists_with_staff_like_feelings.gif)
+---
 
 #### Where to Update Students and Staff
 ![Where to Update Students and Staff](/assets/gifs/students_&_staff.gif)
