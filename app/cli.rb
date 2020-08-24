@@ -31,7 +31,7 @@ class Cli
   end
 
   def coaches
-    %w[Kristine\ Du]
+    %w[Kristine\ Du Jon\ Higger]
   end
 
   def staff
