@@ -85,9 +85,7 @@ class Cli
     puts '---one list with staff---'
     all_people = (@lead_instructors + @coaches + @staff + @students).flatten
     all_people = all_people.shuffle.shuffle.shuffle.shuffle.shuffle
-    all_people.each do |person|
-      puts person
-    end
+    all_people.each { |person| puts person }
   end
 
   def three_lists_with_staff
