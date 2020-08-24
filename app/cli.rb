@@ -133,9 +133,7 @@ class Cli
   def display_each_list
     @three_lists.each.with_index(1) do |list, index|
       puts "---List #{index}---- #{list.first}"
-      list.shuffle.shuffle.shuffle.each do |person|
-        puts person
-      end
+      list.shuffle.shuffle.shuffle.each { |person| puts person }
     end
   end
 
