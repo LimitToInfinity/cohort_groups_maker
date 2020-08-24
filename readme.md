@@ -5,6 +5,12 @@
 2. `cd cohort_groups_maker`
 3. `ruby runner.rb` and just **follow along**
 4. Copy and paste the pairs when you're done!
+5. Options:
+  - Groups (single cohort or mixed cohort)
+  - 1 List with Staff (like mods 2 & 4 feelings)
+  - 3 Lists each with a Staff Leader (like mods 1, 3, & 5 feelings)
+  - 1 List Students Only
+
 
 ### Upkeep
 * Add cohorts to `app/cohorts.json` when cohorts start. (automatically doesn't display cohorts that started more than 15 weeks ago using start_date)
