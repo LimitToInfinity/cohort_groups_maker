@@ -43,7 +43,7 @@ class Cli
   end
 
   def prompt_select_yes?(prompt)
-    prompt_select(prompt, yes: true, no: false)
+    prompt_select(prompt, no: false, yes: true)
   end
 
   def prompt_multi_select(prompt, choices)
