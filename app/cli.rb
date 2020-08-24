@@ -87,8 +87,8 @@ class Cli
   def make_groups
     puts '---student groups---'
     cohorts_by_biggest_size = @cohorts.sort_by(&:length).reverse!
-    cohorts_by_biggest_size.each.with_index(1) do |cohort, index|
-      add_groups(cohort) if index == 1
+    cohorts_by_biggest_size.each.with_index do |cohort, index|
+      add_groups(cohort) if index.zero?
       add_student_to_group(cohort) while cohort.length.positive?
     end
     @groups.each { |group| puts group.join('   |   ') }
