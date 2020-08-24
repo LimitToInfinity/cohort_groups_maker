@@ -2,6 +2,17 @@
 
 # cli class to hold app logic
 class Cli
+  def initialize
+    @prompt = tty_prompt
+    @cohorts = []
+    @lead_instructors = lead_instructors
+    @coaches = coaches
+    @staff = staff
+    @groups = []
+    @group_index = 0
+    @three_lists = [[], [], []]
+  end
+
   def tty_prompt
     TTY::Prompt.new(
       symbols: { marker: '💃' },
@@ -25,17 +36,6 @@ class Cli
 
   def staff
     %w[Brian\ Firooz Josh\ Couper]
-  end
-
-  def initialize
-    @prompt = tty_prompt
-    @cohorts = []
-    @lead_instructors = lead_instructors
-    @coaches = coaches
-    @staff = staff
-    @groups = []
-    @group_index = 0
-    @three_lists = [[], [], []]
   end
 
   def prompt_select(prompt, choices)
@@ -84,16 +84,6 @@ class Cli
     }
   end
 
-  def add_groups(cohort)
-    cohort_size_divided_by_two = (cohort.length / 2.0).floor
-    cohort_size_divided_by_two.times { @groups << [] }
-  end
-
-  def add_student_to_group(cohort)
-    @groups[@group_index] << cohort.delete(cohort.sample)
-    @group_index = @group_index < (@groups.length - 1) ? (@group_index + 1) : 0
-  end
-
   def make_groups
     puts '---student groups---'
     cohorts_by_biggest_size = @cohorts.sort_by(&:length).reverse!
@@ -104,12 +94,35 @@ class Cli
     @groups.each { |group| puts group.join('   |   ') }
   end
 
+  def add_groups(cohort)
+    cohort_size_divided_by_two = (cohort.length / 2.0).floor
+    cohort_size_divided_by_two.times { @groups << [] }
+  end
+
+  def add_student_to_group(cohort)
+    @groups[@group_index] << cohort.delete(cohort.sample)
+    @group_index = @group_index < (@groups.length - 1) ? (@group_index + 1) : 0
+  end
+
   def one_list_with_staff
     remove_staff_who_are_out
     puts '---one list with staff---'
     all_people = (@lead_instructors + @coaches + @staff + @cohorts).flatten
     all_people = all_people.shuffle.shuffle.shuffle.shuffle.shuffle
     all_people.each { |person| puts person }
+  end
+
+  def remove_staff_who_are_out
+    anyone_is_off = prompt_select_yes?('Are any staff off today?')
+    return unless anyone_is_off
+
+    staff_who_are_out = prompt_multi_select(
+      'Who is off?',
+      (@lead_instructors + @coaches + @staff)
+    )
+    @lead_instructors -= staff_who_are_out
+    @coaches -= staff_who_are_out
+    @staff -= staff_who_are_out
   end
 
   def three_lists_with_staff
@@ -119,12 +132,6 @@ class Cli
     add_coaches_and_staff
     add_students
     display_each_list
-  end
-
-  def one_list_students_only
-    puts '---one list students only---'
-    mixed_students = @cohorts.flatten.shuffle.shuffle.shuffle.shuffle
-    mixed_students.each { |student| puts student }
   end
 
   def add_instructors
@@ -161,16 +168,9 @@ class Cli
     end
   end
 
-  def remove_staff_who_are_out
-    anyone_is_off = prompt_select_yes?('Are any staff off today?')
-    return unless anyone_is_off
-
-    staff_who_are_out = prompt_multi_select(
-      'Who is off?',
-      (@lead_instructors + @coaches + @staff)
-    )
-    @lead_instructors -= staff_who_are_out
-    @coaches -= staff_who_are_out
-    @staff -= staff_who_are_out
+  def one_list_students_only
+    puts '---one list students only---'
+    mixed_students = @cohorts.flatten.shuffle.shuffle.shuffle.shuffle
+    mixed_students.each { |student| puts student }
   end
 end
