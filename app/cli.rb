@@ -34,6 +34,7 @@ class Cli
     @lead_instructors = lead_instructors
     @coaches = coaches
     @staff = staff
+    @groups = []
     @three_lists = [[], [], []]
   end
 
@@ -77,7 +78,10 @@ class Cli
 
   def make_groups
     puts '---student groups---'
-    @students.flatten
+    cohort_index = 0
+    @students.each do |cohort|
+      
+    end
   end
 
   def one_list_with_staff
@@ -121,10 +125,10 @@ class Cli
   end
 
   def add_students
-    @students.each do |student_array|
+    @students.each do |cohort|
       list_index = 0
-      while student_array.length.positive?
-        @three_lists[list_index] << student_array.delete(student_array.sample)
+      while cohort.length.positive?
+        @three_lists[list_index] << cohort.delete(cohort.sample)
         list_index = list_index == 2 ? 0 : (list_index + 1)
       end
     end
