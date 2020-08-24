@@ -2,7 +2,7 @@
 
 require_relative 'config/environment'
 
-system('clear')
+system 'clear'
 app = Cli.new
 app.cohort_selection
 app.remove_students_who_are_out
