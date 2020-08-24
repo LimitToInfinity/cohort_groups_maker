@@ -80,7 +80,7 @@ class Cli
     cohorts_by_biggest_size = @cohorts.sort_by(&:length).reverse!
     cohorts_by_biggest_size.each.with_index(1) do |cohort, index|
       if index == 1
-        cohort_size_divided_by_two = (cohort.length / 2.0).ceil
+        cohort_size_divided_by_two = (cohort.length / 2.0).floor
         cohort_size_divided_by_two.times { @groups << [] }
       end
       group_index = 0
