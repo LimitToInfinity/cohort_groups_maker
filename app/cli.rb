@@ -31,7 +31,7 @@ class Cli
   end
 
   def coaches
-    %w[Kristine\ Du]
+    %w[Kristine\ Du Jon\ Higger]
   end
 
   def staff
@@ -86,13 +86,13 @@ class Cli
     puts '---student groups---'
     cohorts_by_biggest_size = @cohorts.sort_by(&:length).reverse!
     cohorts_by_biggest_size.each.with_index do |cohort, index|
-      add_groups(cohort) if index.zero?
+      generate_group_containers(cohort) if index.zero?
       add_student_to_group(cohort) while cohort.length.positive?
     end
-    @groups.each { |group| puts group.join('   |   ') }
+    @groups.each { |group| puts group.join('    |    ') }
   end
 
-  def add_groups(cohort)
+  def generate_group_containers(cohort)
     cohort_size_divided_by_two = (cohort.length / 2.0).floor
     cohort_size_divided_by_two.times { @groups << [] }
   end
