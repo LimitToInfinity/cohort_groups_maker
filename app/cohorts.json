@@ -1,9 +1,39 @@
 {
+  "need to reassign cohort": {
+    "names": [
+      "Brad Calkins",
+      "Brook Beyene",
+      "Indiana Danaher",
+      "Ben Rowe",
+      "Derek Turner",
+      "Gerald Bivens"
+    ]
+  }
+  "only <span>s": {
+    "start_date": "2020-09-14",
+    "names": [
+      "Eric Christine",
+      "Junior Medina",
+      "Jack Sanders",
+      "Jason Easterly",
+      "Jon Noriega",
+      "Katie Bittner",
+      "Kelsey Oshiro",
+      "Marcos Lipic",
+      "Music Meier",
+      "Niel Cnops",
+      "Paige Miles",
+      "Rodney Smith II",
+      "Tiffany Kanjanabout",
+      "William Neal"
+    ]
+  },
   "git_forked": {
     "start_date": "2020-08-03",
     "names": [
       "Bryan Oyloe",
-      "Brad Calkins",
+      "Lynn Amsbury",
+      "Brian Gordon",
       "Dan Madera",
       "D'Arcy Draper",
       "Elliott Stein",
@@ -25,16 +55,13 @@
     "start_date": "2020-06-22",
     "names": [
       "Ben Dunn",
-      "Brook Beyene",
       "Carlos Fernandez",
       "Hailey Ringier",
       "Matt Long",
       "Michael Navoy",
       "Naya Bere",
       "Sam Evans",
-      "Tony Kim",
-      "Zach Mayle",
-      "Ben Rowe"
+      "Tony Kim"
     ]
   },
   "the_empryer_strikes_back": {
