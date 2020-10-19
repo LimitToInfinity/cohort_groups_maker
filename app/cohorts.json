@@ -1,9 +1,9 @@
 {
-  "new_friends": {
+  "only <span>s": {
     "start_date": "2020-09-14",
     "names": [
       "Eric Christine",
-      "Gerardo Medina Jr",
+      "Junior Medina",
       "Jack Sanders",
       "Jason Easterly",
       "Jon Noriega",
@@ -11,18 +11,17 @@
       "Kelsey Oshiro",
       "Marcos Lipic",
       "Music Meier",
-      "Niel Cnops",
       "Paige Miles",
       "Rodney Smith II",
       "Tiffany Kanjanabout",
-      "William Neal"
+      "William Neal",
+      "Brad Calkins"
     ]
   },
   "git_forked": {
     "start_date": "2020-08-03",
     "names": [
       "Bryan Oyloe",
-      "Brad Calkins",
       "Dan Madera",
       "D'Arcy Draper",
       "Elliott Stein",
@@ -35,9 +34,10 @@
       "Victor Amigo",
       "Luis Garcia",
       "Terrell Cooper",
-      "Thomas (TJ) Bachorz",
+      "TJ Bachorz",
       "Jay Oliver",
-      "Matt Malecki"
+      "Matt Malecki",
+      "Brian Gordo"
     ]
   },
   "runtime_terrors": {
@@ -53,7 +53,9 @@
       "Sam Evans",
       "Tony Kim",
       "Zach Mayle",
-      "Ben Rowe"
+      "Ben Rowe",
+      "Indiana Danaher",
+      "Chris Banta"
     ]
   },
   "the_empryer_strikes_back": {
