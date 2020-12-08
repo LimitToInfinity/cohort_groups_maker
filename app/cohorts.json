@@ -1,5 +1,32 @@
 {
-  "Illicit Syntax": {
+  "new friends": {
+    "start_date": "2020-12-07",
+    "names": [
+      "Alexander Sherwin",
+      "Arielle Ross",
+      "Ben Westergaard",
+      "Brett Needham",
+      "Colton O'Connor",
+      "Diana Rybikov",
+      "Grant Hesketh",
+      "Jeff Golden",
+      "Jack Hubert",
+      "Kat Leight",
+      "Lou Leffler",
+      "Luke Thinnes",
+      "Mary Beth Ingram",
+      "Mell Basham",
+      "Nate Croteau",
+      "Nathan Fedzen",
+      "Nathan Gusky",
+      "Obinna Nwabia",
+      "Raz Al-Jaf",
+      "Reed Roffis",
+      "Ryan Choe",
+      "Sam Gold"
+    ]
+  },
+  "illicit syntax": {
     "start_date": "2020-10-26",
     "names": [
       "Alexander Gabriel",
